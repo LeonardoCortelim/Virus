@@ -6,7 +6,7 @@
 
 Você pode baixar a versão mais recente do jogo aqui:
 
-[Download Release](https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO/releases)
+[Download Release](https://github.com/LeonardoCortelim/Virus/releases/tag/v)
 
 ---
 
