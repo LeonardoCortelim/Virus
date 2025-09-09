@@ -201,6 +201,8 @@ MonoBehaviour:
   coinCount: 0
   coinText: {fileID: 1981306704}
   cutsceneManager: {fileID: 134983282}
+  coinSound: {fileID: 8300000, guid: db8d7191ba31ebb4d9951f5bd5af94cd, type: 3}
+  coinVolume: 0.3
 --- !u!4 &195201370
 Transform:
   m_ObjectHideFlags: 0
@@ -2079,7 +2081,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1684424982}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 023046353bd4b2a499d074f3870b3679, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 88d57f600f269e7408f70dbe7a9b0793, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 519420031}

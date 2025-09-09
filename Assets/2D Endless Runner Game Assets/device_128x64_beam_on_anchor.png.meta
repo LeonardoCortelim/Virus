@@ -143,7 +143,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      device_128x64_beam_on_anchor_0: 7041016288893206914
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
