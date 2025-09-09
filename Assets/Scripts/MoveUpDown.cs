@@ -13,23 +13,26 @@ public class MoveUpDown : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
+            // Só controla movimento se tocar na metade ESQUERDA da tela
+            if (touch.position.x < Screen.width / 2)
             {
-                if (touch.position.y > Screen.height / 2)
+                if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
                 {
-                    if (transform.position.y < topLimit)
-                        transform.Translate(Vector3.up * speed * Time.deltaTime);
-                }
-                else
-                {
-                    if (transform.position.y > bottomLimit)
-                        transform.Translate(Vector3.down * speed * Time.deltaTime);
+                    if (touch.position.y > Screen.height / 2)
+                    {
+                        if (transform.position.y < topLimit)
+                            transform.Translate(Vector3.up * speed * Time.deltaTime);
+                    }
+                    else
+                    {
+                        if (transform.position.y > bottomLimit)
+                            transform.Translate(Vector3.down * speed * Time.deltaTime);
+                    }
                 }
             }
         }
 
-        // --- Para PC (mouse ou teclado) ---
-        // Teclas W/S
+        // --- Para PC (teste com teclado) ---
         if (Input.GetKey(KeyCode.W))
         {
             if (transform.position.y < topLimit)
@@ -41,19 +44,22 @@ public class MoveUpDown : MonoBehaviour
                 transform.Translate(Vector3.down * speed * Time.deltaTime);
         }
 
-        // Clique do mouse: cima e baixo
-        if (Input.GetMouseButton(0)) // botão esquerdo do mouse
+        // Clique do mouse: mover só se clicar na esquerda da tela
+        if (Input.GetMouseButton(0))
         {
             Vector3 mousePos = Input.mousePosition;
-            if (mousePos.y > Screen.height / 2)
+            if (mousePos.x < Screen.width / 2) // esquerda
             {
-                if (transform.position.y < topLimit)
-                    transform.Translate(Vector3.up * speed * Time.deltaTime);
-            }
-            else
-            {
-                if (transform.position.y > bottomLimit)
-                    transform.Translate(Vector3.down * speed * Time.deltaTime);
+                if (mousePos.y > Screen.height / 2)
+                {
+                    if (transform.position.y < topLimit)
+                        transform.Translate(Vector3.up * speed * Time.deltaTime);
+                }
+                else
+                {
+                    if (transform.position.y > bottomLimit)
+                        transform.Translate(Vector3.down * speed * Time.deltaTime);
+                }
             }
         }
     }

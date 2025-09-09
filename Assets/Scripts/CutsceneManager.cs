@@ -1,20 +1,21 @@
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CutsceneManager : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;     // Seu Video Player
-    public GameObject[] uiToHide;       // UI que você quer esconder durante a cutscene
-    public AudioSource backgroundMusic; // Música de fundo
-    public float fadeDuration = 1f;     // Duração do fade in/out
+    [Header("Cutscene Settings")]
+    public VideoPlayer videoPlayer;
+    public GameObject[] uiToHide;
+    public AudioSource backgroundMusic;
+    public float fadeDuration = 1f;
+    public string nextSceneName;
 
     private bool cutscenePlaying = false;
 
-    public bool CutscenePlaying
-    {
-        get { return cutscenePlaying; }
-    }
+    public bool CutscenePlaying => cutscenePlaying;
 
     public void PlayCutscene()
     {
@@ -22,31 +23,25 @@ public class CutsceneManager : MonoBehaviour
 
         cutscenePlaying = true;
 
-        // pausa o jogo
         Time.timeScale = 0;
 
-        // pausa música
         if (backgroundMusic != null)
             backgroundMusic.Pause();
 
-        // desativa UI
         foreach (GameObject ui in uiToHide)
             ui.SetActive(false);
 
-        // faz fade in e toca vídeo
         StartCoroutine(FadeInAndPlay());
     }
 
     private IEnumerator FadeInAndPlay()
     {
-        // garante que a câmera comece invisível
         videoPlayer.targetCameraAlpha = 0f;
 
-        // fade in
         float t = 0f;
         while (t < fadeDuration)
         {
-            t += Time.unscaledDeltaTime; // usamos unscaled para não depender do Time.timeScale
+            t += Time.unscaledDeltaTime;
             videoPlayer.targetCameraAlpha = Mathf.Clamp01(t / fadeDuration);
             yield return null;
         }
@@ -57,33 +52,38 @@ public class CutsceneManager : MonoBehaviour
 
     private void EndCutscene(VideoPlayer vp)
     {
-        StartCoroutine(FadeOutAndEnd());
+        StartCoroutine(FadeOutAndLoadScene());
     }
 
-    private IEnumerator FadeOutAndEnd()
+    private IEnumerator FadeOutAndLoadScene()
     {
-        // fade out
+        // cria painel preto full screen
+        GameObject fadePanel = new GameObject("FadePanel");
+        Canvas canvas = fadePanel.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        CanvasGroup cg = fadePanel.AddComponent<CanvasGroup>();
+        cg.alpha = 0f;
+        Image img = fadePanel.AddComponent<Image>();
+        img.color = Color.black;
+
         float t = 0f;
         while (t < fadeDuration)
         {
             t += Time.unscaledDeltaTime;
-            videoPlayer.targetCameraAlpha = Mathf.Clamp01(1f - t / fadeDuration);
+            float alpha = Mathf.Clamp01(t / fadeDuration);
+            videoPlayer.targetCameraAlpha = 1f - alpha; // fade do vídeo
+            cg.alpha = alpha;                          // painel cobre a tela
             yield return null;
         }
 
-        videoPlayer.Stop(); // garante que o vídeo pare
-
-        // retoma jogo
+        // garante que tudo está visível/preto
+        videoPlayer.Stop();
         Time.timeScale = 1;
-
-        // retoma música
         if (backgroundMusic != null)
             backgroundMusic.UnPause();
 
-        // reativa UI
-        foreach (GameObject ui in uiToHide)
-            ui.SetActive(true);
-
-        cutscenePlaying = false;
+        // carrega a nova cena
+        if (!string.IsNullOrEmpty(nextSceneName))
+            SceneManager.LoadScene(nextSceneName);
     }
 }

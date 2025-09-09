@@ -11,6 +11,7 @@ TagManager:
   - Item
   - Magnet
   - Laser
+  - Boss
   layers:
   - Default
   - TransparentFX
