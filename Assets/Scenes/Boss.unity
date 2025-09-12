@@ -13438,13 +13438,13 @@ MonoBehaviour:
   player: {fileID: 979051997}
   audioSource: {fileID: 1915593487}
   slowIcon: {fileID: 1663988516}
-  slowDuration: 3
-  slowFactor: 2
+  slowDuration: 5
+  slowFactor: 3
   slowCooldown: 10
   firstSlowDelay: 10
   slowEffectPrefab: {fileID: 5440293499952678433, guid: fafae32fde4fa2340a5abf233d76a455, type: 3}
   bossTransform: {fileID: 2804342744652300143}
-  canvasPrefab: {fileID: 3901439730135122438, guid: 0b8d2a367117721409ac8d38b103e363, type: 3}
+  canvasPrefab: {fileID: 7603597372506966998, guid: c376499126ffee3428fbe6ec5ed4e481, type: 3}
 --- !u!1001 &4889339930809107233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13459,7 +13459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 837922574016804858, guid: 991b93b6f5b3b554abe9b62cc9a081c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 837922574016804858, guid: 991b93b6f5b3b554abe9b62cc9a081c0, type: 3}
       propertyPath: m_LocalPosition.z
