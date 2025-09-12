@@ -13439,7 +13439,7 @@ MonoBehaviour:
   audioSource: {fileID: 1915593487}
   slowIcon: {fileID: 1663988516}
   slowDuration: 3
-  slowFactor: 1
+  slowFactor: 2
   slowCooldown: 10
   firstSlowDelay: 10
   slowEffectPrefab: {fileID: 5440293499952678433, guid: fafae32fde4fa2340a5abf233d76a455, type: 3}
@@ -13519,7 +13519,7 @@ PrefabInstance:
       objectReference: {fileID: 979051997}
     - target: {fileID: 6881146238418108517, guid: 991b93b6f5b3b554abe9b62cc9a081c0, type: 3}
       propertyPath: speed
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6881146238418108517, guid: 991b93b6f5b3b554abe9b62cc9a081c0, type: 3}
       propertyPath: joystick
